@@ -123,7 +123,8 @@ class PostController extends Controller
     private function getValidationRules() {
         return [
             'title' => 'required|max:255',
-            'content' => 'required|max:30000'
+            'content' => 'required|max:30000',
+            'category_id' => 'nullable|exists:categories,id'
         ];
     }
 }
