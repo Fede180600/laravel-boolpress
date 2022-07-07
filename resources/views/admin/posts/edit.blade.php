@@ -24,6 +24,16 @@
           </div>
 
           <div class="mb-3">
+            <label for="category_id" class="form-label">Categoria:</label>
+            <select type="text" class="form-control" id="category_id" name="category_id">
+                <option value="">Nessuna</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $post->category && (old('category_id', $post->category->id)) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+          <div class="mb-3">
               <label for="content" class="form-label">Contenuto Post</label>
               <textarea type="text" class="form-control" id="content" name="content" rows="10">{{ old('content') ? old('content') : $post->content }}</textarea>
           </div>
