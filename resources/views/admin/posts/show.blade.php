@@ -3,6 +3,7 @@
 @section('content')
     <h1>{{ $post->title }}</h1>
     <small>SLUG: <strong>{{ $post->slug }}</strong></small>
+    <p>Category: {{ $category ? $category->name : 'NESSUNA CATEGORIA' }}</p>
     <p>{{ $post->content }}</p>
     <form action="{{ route('admin.posts.destroy', ['post'=>$post->id]) }}" method="POST">
         @csrf
