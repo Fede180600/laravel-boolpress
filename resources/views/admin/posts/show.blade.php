@@ -5,10 +5,12 @@
     <small>SLUG: <strong>{{ $post->slug }}</strong></small>
     <p>Category: {{ $category ? $category->name : 'NESSUNA CATEGORIA' }}</p>
     <p>{{ $post->content }}</p>
-    <form action="{{ route('admin.posts.destroy', ['post'=>$post->id]) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <a class="btn btn-primary" href="{{ route('admin.posts.edit', ['post'=>$post->id]) }}">MODIFICA</a>
-        <button class="btn btn-danger">ELIMINA</button>
-    </form>
+    <div class="d-flex">
+        <a class="btn btn-primary mr-2" href="{{ route('admin.posts.edit', ['post'=>$post->id]) }}">MODIFICA</a>
+        <form action="{{ route('admin.posts.destroy', ['post'=>$post->id]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">ELIMINA</button>
+        </form>
+    </div>
 @endsection
