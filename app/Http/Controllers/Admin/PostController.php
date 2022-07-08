@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -59,7 +60,6 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $category = $post->category;
-        // $categoriesPosts = $category->posts;
         return view('admin.posts.show', compact('post', 'category'));
     }
 
