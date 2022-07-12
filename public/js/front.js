@@ -1928,6 +1928,13 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (resp) {
         _this.posts = resp.data.results;
       });
+    },
+    troncateText: function troncateText(text, maxCharNum) {
+      if (text.length > maxCharNum) {
+        return text.substr(0, maxCharNum) + '...';
+      }
+
+      return text;
     }
   }
 });
@@ -1988,7 +1995,7 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v("\r\n                            " + _vm._s(post.content) + "\r\n                        ")])])])]);
+    }, [_vm._v("\r\n                            " + _vm._s(_vm.troncateText(post.content, 50)) + "\r\n                        ")])])])]);
   }), 0)]);
 };
 

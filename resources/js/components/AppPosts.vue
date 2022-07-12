@@ -7,7 +7,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">
-                            {{ post.content}}
+                            {{ troncateText(post.content, 50)}}
                         </p>
                         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     </div>
@@ -39,6 +39,12 @@ export default {
                     this.posts = resp.data.results;
                 });
         },
+        troncateText(text, maxCharNum) {
+            if( text.length > maxCharNum) {
+                return text.substr(0, maxCharNum) + '...';
+            }
+            return text;
+        }
     }
 
 }
