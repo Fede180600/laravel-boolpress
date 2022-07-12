@@ -1916,7 +1916,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
-      currentPage: 1
+      currentPage: 1,
+      lastPage: 0,
+      totalPosts: 0
     };
   },
   created: function created() {
@@ -1933,6 +1935,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         _this.posts = resp.data.results.data;
         _this.currentPage = resp.data.results.current_page;
+        _this.lastPage = resp.data.results.last_page;
+        _this.totalPosts = resp.data.results.total;
       });
     },
     troncateText: function troncateText(text, maxCharNum) {
@@ -1984,7 +1988,7 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_c("div", {
+  }, [_c("h5", [_vm._v("Post trovati: " + _vm._s(_vm.totalPosts))]), _vm._v(" "), _c("div", {
     staticClass: "row row-cols-3"
   }, _vm._l(_vm.posts, function (post) {
     return _c("div", {
@@ -2010,8 +2014,41 @@ var render = function render() {
     }
   }, [_c("ul", {
     staticClass: "pagination"
-  }, [_vm._m(0), _vm._v(" "), _c("li", {
-    staticClass: "page-item"
+  }, [_c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === 1
+    }
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage - 1);
+      }
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _vm._l(_vm.lastPage, function (n) {
+    return _c("li", {
+      key: n,
+      staticClass: "page-item"
+    }, [_c("a", {
+      staticClass: "page-link",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.getPosts(n);
+        }
+      }
+    }, [_vm._v(_vm._s(n))])]);
+  }), _vm._v(" "), _c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === _vm.lastPage
+    }
   }, [_c("a", {
     staticClass: "page-link",
     attrs: {
@@ -2022,22 +2059,10 @@ var render = function render() {
         return _vm.getPosts(_vm.currentPage + 1);
       }
     }
-  }, [_vm._v("Next")])])])])])]);
+  }, [_vm._v("Next")])])], 2)])])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Previous")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
