@@ -1915,18 +1915,24 @@ __webpack_require__.r(__webpack_exports__);
   name: 'AppPosts',
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      currentPage: 1
     };
   },
   created: function created() {
     this.getPosts();
   },
   methods: {
-    getPosts: function getPosts() {
+    getPosts: function getPosts(pageNumber) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (resp) {
-        _this.posts = resp.data.results;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts", {
+        params: {
+          page: pageNumber
+        }
+      }).then(function (resp) {
+        _this.posts = resp.data.results.data;
+        _this.currentPage = resp.data.results.current_page;
       });
     },
     troncateText: function troncateText(text, maxCharNum) {
@@ -1996,10 +2002,42 @@ var render = function render() {
     }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
     }, [_vm._v("\r\n                            " + _vm._s(_vm.troncateText(post.content, 50)) + "\r\n                        ")])])])]);
-  }), 0)]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "mt-3"
+  }, [_c("nav", {
+    attrs: {
+      "aria-label": "Page navigation example"
+    }
+  }, [_c("ul", {
+    staticClass: "pagination"
+  }, [_vm._m(0), _vm._v(" "), _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage + 1);
+      }
+    }
+  }, [_vm._v("Next")])])])])])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("li", {
+    staticClass: "page-item"
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Previous")])]);
+}];
 render._withStripped = true;
 
 
