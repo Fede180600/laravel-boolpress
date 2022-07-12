@@ -1969,10 +1969,35 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row row-cols-3"
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("div", {
+      key: post.id,
+      staticClass: "col"
+    }, [_vm._m(0, true)]);
+  }), 0)]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "card m-2",
+    staticStyle: {
+      width: "18rem"
+    }
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v("Card title")]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of\r\n                            the\r\n                            card's content.\r\n                        ")])])]);
+}];
 render._withStripped = true;
 
 
