@@ -1,21 +1,23 @@
 <template>
     <div>
+        <Header />
         <div class="container text-center py-2">
-            <h1>Lista dei posts:</h1>
-            <AppPosts />
+
+            <router-view></router-view>
+
         </div>
     </div>
 </template>
 
 <script>
-import AppPosts from '../components/AppPosts.vue';
+import Header from '../components/Header.vue';
 
 export default {
     name: 'App',
     components: {
-        AppPosts
+        Header
     }
-
+    
 }
 </script>
 
