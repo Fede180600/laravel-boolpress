@@ -25,7 +25,7 @@
                 <ul class="pagination">
                     <li class="page-item" :class="{ disabled: currentPage === 1}"><a @click="getPosts(currentPage - 1)" class="page-link" href="#">Previous</a></li>
 
-                    <li class="page-item" v-for="n in lastPage" :key="n"><a @click="getPosts(n)" class="page-link" href="#">{{ n }}</a></li>
+                    <li class="page-item" v-for="n in lastPage" :key="n" :class="{ active: currentPage === n }"><a @click="getPosts(n)" class="page-link" href="#">{{ n }}</a></li>
 
                     <li class="page-item" :class="{ disabled: currentPage === lastPage }"><a @click="getPosts(currentPage + 1)" class="page-link" href="#">Next</a></li>
                 </ul>

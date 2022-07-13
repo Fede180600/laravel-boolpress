@@ -2032,7 +2032,10 @@ var render = function render() {
   }, [_vm._v("Previous")])]), _vm._v(" "), _vm._l(_vm.lastPage, function (n) {
     return _c("li", {
       key: n,
-      staticClass: "page-item"
+      staticClass: "page-item",
+      "class": {
+        active: _vm.currentPage === n
+      }
     }, [_c("a", {
       staticClass: "page-link",
       attrs: {
