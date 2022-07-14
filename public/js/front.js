@@ -2053,13 +2053,26 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getPostDetails();
   },
+  computed: {
+    categoryName: function categoryName() {
+      return this.post.category ? this.post.category.name : 'nessuna';
+    }
+  },
   methods: {
     getPostDetails: function getPostDetails() {
       var _this = this;
 
       var slug = this.$route.params.slug;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/posts/".concat(slug)).then(function (resp) {
-        _this.post = resp.data.results;
+        if (resp.data.success) {
+          _this.post = resp.data.results;
+        } else {
+          _this.$router.push({
+            name: 'not-found'
+          });
+        }
+
+        ;
       });
     }
   }
@@ -2121,7 +2134,17 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v("\r\n                            " + _vm._s(_vm.troncateText(post.content, 50)) + "\r\n                        ")])])])]);
+    }, [_vm._v("\r\n                            " + _vm._s(_vm.troncateText(post.content, 50)) + "\r\n                        ")]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-primary",
+      attrs: {
+        to: {
+          name: "single-post",
+          params: {
+            slug: post.slug
+          }
+        }
+      }
+    }, [_vm._v("Dettagli post")])], 1)])]);
   }), 0), _vm._v(" "), _c("div", {
     staticClass: "mt-3"
   }, [_c("nav", {
@@ -2401,7 +2424,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]);
+  return _c("div", {
+    staticClass: "text-left"
+  }, [_vm.post ? _c("section", [_c("h1", [_vm._v("Dettagli post:")]), _vm._v(" "), _c("h3", [_vm._v("Titolo Post: " + _vm._s(_vm.post.title))]), _vm._v(" "), _c("p", [_vm._v("Contenuto: " + _vm._s(_vm.post.content))]), _vm._v(" "), _c("p", [_vm._v("Categoria: " + _vm._s(_vm.categoryName))]), _vm._v(" "), _c("i", {
+    staticClass: "fa fa-smile"
+  }), _vm._v(" "), _c("div", _vm._l(_vm.post.tags, function (tag) {
+    return _c("span", {
+      key: tag.id,
+      staticClass: "badge bg-primary"
+    }, [_vm._v(_vm._s(tag.name))]);
+  }), 0)]) : _c("section", [_c("h2", [_vm._v("Loading...")])])]);
 };
 
 var staticRenderFns = [];
@@ -53584,6 +53616,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _pages_SinglePost_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/*',
+    name: 'not-found',
     component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 });

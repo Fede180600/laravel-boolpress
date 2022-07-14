@@ -11,7 +11,7 @@
                         <p class="card-text">
                             {{ troncateText(post.content, 50) }}
                         </p>
-                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        <router-link :to="{name: 'single-post', params: { slug: post.slug}}" class="btn btn-primary">Dettagli post</router-link>
                     </div>
                 </div>
             </div>
