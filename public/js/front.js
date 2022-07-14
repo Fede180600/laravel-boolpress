@@ -2185,7 +2185,6 @@ var render = function render() {
   }, [_c("router-link", {
     staticClass: "nav-link active",
     attrs: {
-      "aria-current": "page",
       to: {
         name: "home"
       }
@@ -2195,7 +2194,6 @@ var render = function render() {
   }, [_c("router-link", {
     staticClass: "nav-link active",
     attrs: {
-      "aria-current": "page",
       to: {
         name: "about"
       }
@@ -2205,7 +2203,6 @@ var render = function render() {
   }, [_c("router-link", {
     staticClass: "nav-link active",
     attrs: {
-      "aria-current": "page",
       to: {
         name: "blog"
       }
