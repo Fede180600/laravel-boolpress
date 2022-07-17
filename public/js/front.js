@@ -2128,7 +2128,13 @@ var render = function render() {
       staticStyle: {
         width: "18rem"
       }
-    }, [_c("div", {
+    }, [post.cover ? _c("div", [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: post.cover,
+        alt: "..."
+      }
+    })]) : _vm._e(), _vm._v(" "), _c("div", {
       staticClass: "card-body"
     }, [_c("h5", {
       staticClass: "card-title"
@@ -2426,7 +2432,15 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "text-left"
-  }, [_vm.post ? _c("section", [_c("h1", [_vm._v("Dettagli post:")]), _vm._v(" "), _c("h3", [_vm._v("Titolo Post: " + _vm._s(_vm.post.title))]), _vm._v(" "), _c("p", [_vm._v("Contenuto: " + _vm._s(_vm.post.content))]), _vm._v(" "), _c("p", [_vm._v("Categoria: " + _vm._s(_vm.categoryName))]), _vm._v(" "), _c("div", _vm._l(_vm.post.tags, function (tag) {
+  }, [_vm.post ? _c("section", [_c("h1", [_vm._v("Dettagli post:")]), _vm._v(" "), _c("h3", [_vm._v("Titolo Post: " + _vm._s(_vm.post.title))]), _vm._v(" "), _vm.post.cover ? _c("div", [_c("img", {
+    staticStyle: {
+      "max-width": "400px"
+    },
+    attrs: {
+      src: _vm.post.cover,
+      alt: ""
+    }
+  })]) : _vm._e(), _vm._v(" "), _c("p", [_vm._v("Contenuto: " + _vm._s(_vm.post.content))]), _vm._v(" "), _c("p", [_vm._v("Categoria: " + _vm._s(_vm.categoryName))]), _vm._v(" "), _c("div", _vm._l(_vm.post.tags, function (tag) {
     return _c("span", {
       key: tag.id,
       staticClass: "badge bg-primary"
