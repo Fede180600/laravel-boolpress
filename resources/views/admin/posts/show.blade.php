@@ -2,8 +2,14 @@
 
 @section('content')
     <h1>{{ $post->title }}</h1>
+    
+    @if ($post->cover)
+        <img style="max-width: 400px;" src="{{ asset('storage/' . $post->cover) }}" alt="">  
+    @endif
 
-    <small>SLUG: <strong>{{ $post->slug }}</strong></small>
+    <div>
+        <small>SLUG: <strong>{{ $post->slug }}</strong></small>        
+    </div>
 
     <p>Category: {{ $category ? $category->name : 'NESSUNA CATEGORIA' }}</p>
 
