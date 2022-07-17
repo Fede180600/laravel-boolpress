@@ -15,7 +15,7 @@
       @endif
     {{-- /BOX PER ERRORI NELLA VALIDAZIONE DEI CAMPI --}}
 
-      <form action="{{ route('admin.posts.update', ['post'=>$post->id]) }}" method="POST">
+      <form action="{{ route('admin.posts.update', ['post'=>$post->id]) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div class="mb-3">
@@ -53,6 +53,17 @@
               <label for="content" class="form-label">Contenuto Post</label>
               <textarea type="text" class="form-control" id="content" name="content" rows="10">{{ old('content') ? old('content') : $post->content }}</textarea>
           </div>
+
+
+          <div class="mb-3">
+            <label for="image">Cambia immagine</label>
+            <input type="file" id="image" name="image" class="mb-3">
+            @if ($post->cover)
+                <h5>Immagine Attuale:</h5>
+                <img src="{{ asset('storage/' . $post->cover) }}" style="max-width: 400px;" alt="">
+            @endif
+          </div>
+
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
   </div>
