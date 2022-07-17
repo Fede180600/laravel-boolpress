@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Mail\NewPostNotificationToAdmin;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -57,6 +59,9 @@ class PostController extends Controller
         if(isset($data['tags'])) {
             $post->tags()->sync($data['tags']);
         }
+
+        Mail::to('superadmin@boolpress.it')->send(new NewPostNotificationToAdmin($post));
+
         return redirect()->route('admin.posts.show', ['post'=>$post->id]);
     }
 
