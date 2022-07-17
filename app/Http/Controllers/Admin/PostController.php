@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -44,10 +45,15 @@ class PostController extends Controller
     {
         $request->validate($this->getValidationRules());
         $data = $request->all();
+        if(isset($data['image'])) {
+            $image_path = Storage::put('post_covers', $data['image']);
+            $data['cover'] = $image_path;
+        }
         $post = new Post();
         $post->fill($data);
         $post->slug = $this->generatePostSlugFromTitle($post->title);
         $post->save();
+
         if(isset($data['tags'])) {
             $post->tags()->sync($data['tags']);
         }
@@ -92,15 +98,29 @@ class PostController extends Controller
     {
         $request->validate($this->getValidationRules());
         $data = $request->all();
+        // dd($data);
         $post = Post::findOrFail($id);
+
+        if(isset($data['image'])) {
+            if ($post->cover) {
+                Storage::delete($post->cover);
+            }
+            $image_path = Storage::put('post-covers', $data['image']);
+            $data['cover'] = $image_path;
+        }
+        
+
+
         $post->fill($data);
         $post->slug=$this->generatePostSlugFromTitle($post->title);
         $post->update();
+
         if(isset($data['tags'])) {
             $post->tags()->sync($data['tags']);
         } else {
             $post->tags()->sync([]);
         }
+
         return redirect()->route('admin.posts.show', ['post'=>$post->id]);
         
     }
@@ -114,6 +134,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post_to_delete = Post::findOrFail($id);
+        if ($post_to_delete->cover) {
+            Storage::delete($post_to_delete->cover);
+        };
         $post_to_delete->delete();
         return redirect()->route('admin.posts.index');
     }
@@ -137,6 +160,7 @@ class PostController extends Controller
             'content' => 'required|max:30000',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
+            'image' => 'max:512'
         ];
     }
 }
