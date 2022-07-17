@@ -15,7 +15,7 @@
         @endif
       {{-- /BOX PER ERRORI NELLA VALIDAZIONE DEI CAMPI --}}
 
-        <form action="{{ route('admin.posts.store') }}" method="POST">
+        <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="mb-3">
@@ -52,6 +52,11 @@
             <div class="mb-3">
                 <label for="content" class="form-label"><h4>Contenuto post:</h4></label>
                 <textarea type="text" class="form-control" id="content" name="content" rows="10"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="image">Immagine Copertina</label>
+                <input type="file" id="image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
