@@ -3,9 +3,11 @@
         <section v-if="post">
             <h1>Dettagli post:</h1>
             <h3>Titolo Post: {{ post.title }}</h3>
+            <div v-if="post.cover">
+            <img :src="post.cover" style="max-width: 400px;" alt="">
+            </div>
             <p>Contenuto: {{ post.content }}</p>
             <p>Categoria: {{ categoryName }}</p>
-            <i class="fa fa-smile"></i>
             <div>
                 <span v-for="tag in post.tags" :key="tag.id" class="badge bg-primary">{{ tag.name }}</span>
             </div>

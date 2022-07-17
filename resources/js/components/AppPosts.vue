@@ -5,7 +5,9 @@
             <!-- single post -->
             <div class="col" v-for="post in posts" :key="post.id">
                 <div class="card m-2" style="width: 18rem;">
-                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div v-if="post.cover">
+                    <img :src="post.cover" class="card-img-top" alt="...">
+                </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">
